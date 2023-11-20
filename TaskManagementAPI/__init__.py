@@ -13,6 +13,8 @@ app = Flask("Task Management Application")
 # initialize the SQLAlchemy
 db = SQLAlchemy(app)
 
+# added tested comments
+
 # initialize the Marshmallow
 ma = Marshmallow(app)
 
