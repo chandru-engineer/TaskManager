@@ -6,8 +6,12 @@ from TaskManagementAPI.configs.configs import Config
 from TaskManagementAPI.configs.logger_config import logger
 from TaskManagementAPI.errors.error_handler import CustomError
 
+
 # create Flask application 
 app = Flask("Task Management Application")
+
+# Added all the Configs on the Application
+app.config.from_object(Config)
 
 # initialize the SQLAlchemy
 db = SQLAlchemy(app)
@@ -32,9 +36,6 @@ def handle_custom_error(error):
 
 # create factory function
 def create_app(config_class=Config):
-
-    # adding the config to the application
-    app.config.from_object(Config)
 
     # register all the blue prints
     from TaskManagementAPI.APIs.Auth.auth_view import auth_blueprint
