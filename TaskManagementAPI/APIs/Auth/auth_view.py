@@ -6,7 +6,31 @@ from TaskManagementAPI.constants.status_code import BAD_REQUEST
 from TaskManagementAPI.constants.messages import NOT_VALID_JSON
 from TaskManagementAPI.configs.flask_limiter_config import limiter
 from TaskManagementAPI.APIs.Auth.auth_controller import create_account_control, \
-    update_account_control, get_account_details_control, delete_account_control
+    update_account_control, get_account_details_control, delete_account_control, \
+    register_controller
+
+
+
+
+
+@auth_blueprint.route('/regiter', methods=['POST'])
+@limiter.limit("1 per day")
+def register_view():
+    try:
+        data = request.get_json(force=True)
+        return register_controller(data)
+    except BadRequest as error:
+        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
+    except Exception as error:
+         
+         raise CustomError(str(error), log=True)
+
+
+
+
+
+
+
 
 
 

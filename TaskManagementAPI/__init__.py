@@ -1,20 +1,16 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from TaskManagementAPI.errors.error_handler import CustomError
-from TaskManagementAPI.configs.logger_config import logger
-from TaskManagementAPI.env_loader import DB_URI
 from flask_migrate import Migrate
 from TaskManagementAPI.configs.configs import Config
+from TaskManagementAPI.configs.logger_config import logger
+from TaskManagementAPI.errors.error_handler import CustomError
 
 # create Flask application 
 app = Flask("Task Management Application")
 
 # initialize the SQLAlchemy
 db = SQLAlchemy(app)
-
-# added tested comments  
-# added
 
 # initialize the Marshmallow
 ma = Marshmallow(app)

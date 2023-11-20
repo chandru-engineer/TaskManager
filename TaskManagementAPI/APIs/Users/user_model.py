@@ -18,6 +18,15 @@ class User(db.Model):
     updated_by = db.Column(db.String, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=None)
+
+    def __str__(self):
+        return self.user_name
+    
+    def add(self): 
+        pass
+
+    def commit(self):
+        pass
     
 
 

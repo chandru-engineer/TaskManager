@@ -1,4 +1,4 @@
-from TaskManagementAPI.env_loader import (
+from TaskManagementAPI.configs.env_loader import (
     DEBUG,
     SECRET_KEY,
     SQLALCHEMY_TRACK_MODIFICATIONS,
