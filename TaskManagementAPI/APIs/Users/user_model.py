@@ -13,7 +13,7 @@ class User(db.Model):
     is_admin = db.Column(db.Boolean, nullable=True)
     password = db.Column(db.String, nullable=True)
     otp = db.Column(db.Integer, nullable=True)
-    is_otp_used = db.Column(db.Boolean, nullable=True, default=True)
+    is_otp_used = db.Column(db.Boolean, nullable=True, default=False)
     is_active = db.Column(db.Boolean, nullable=True, default=True)
     is_deleted = db.Column(db.Boolean, nullable=True, default=False)
     last_login_time = db.Column(db.DateTime, default=None)
