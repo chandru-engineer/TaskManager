@@ -17,8 +17,10 @@ To run this application, follow these steps:
 	PORT=5000
 	HOST=0.0.0.0
 	DB_URI=postgresql://postgres:root@localhost:5432/TaskManager
-
-   	SECRET_KEY=your_flask_secret_key
+   SECRET_KEY=your_flask_secret_key
+   SQLALCHEMY_TRACK_MODIFICATIONS=False
+   RESULT_BACKEND=rpc://
+   BROKER_URL=pyamqp://guest:guest@localhost:5672//
    ```
 
    Adjust these values based on your specific database and application configuration.
