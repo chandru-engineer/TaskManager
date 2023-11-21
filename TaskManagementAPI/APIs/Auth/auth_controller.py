@@ -1,6 +1,7 @@
 import jwt
 import random
 import string
+import secrets
 import hashlib
 from datetime import datetime
 from TaskManagementAPI import db
@@ -174,8 +175,10 @@ def add_user(data: dict):
 
 
 def generate_uid(length: int):
-    characters = string.ascii_letters 
-    return ''.join(random.choice(characters) for _ in range(length))
+    characters = string.ascii_letters
+    uid = ''.join(secrets.choice(characters) for _ in range(length))
+    return uid
+
 
 def generate_hash(input_string: str):
     # Create a new SHA-256 hash object
@@ -185,7 +188,9 @@ def generate_hash(input_string: str):
     # Get the hexadecimal representation of the hash
     return sha256_hash.hexdigest()
 
+
+
 def generate_otp():
-    # Generate a random 6-digit number
-    otp = random.randint(100000, 999999)
+    # Generate a secure random 6-digit number
+    otp = secrets.randbelow(900000) + 100000
     return otp
