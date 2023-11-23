@@ -13,7 +13,8 @@ from TaskManagementAPI.constants.status_code import (
     OK, BAD_REQUEST) 
 from TaskManagementAPI.constants.messages import (
     SERVER_ERROR, OTP_SENT, USER_NOT_FOUND, INVALID_OTP, PASSWORD_UPDATED, 
-    INVALID_PASSWORD, INVALID_REFRESH_TOKEN, LOGIN_REQUIRED, REFRESG_TOKEN_REQUIRED) 
+    INVALID_PASSWORD, INVALID_REFRESH_TOKEN, LOGIN_REQUIRED, REFRESG_TOKEN_REQUIRED,
+    NOT_VALID_JSON) 
 from TaskManagementAPI.errors.error_handler import CustomError
 from TaskManagementAPI.APIs.Org.org_model import Org
 from TaskManagementAPI.APIs.Users.user_model import User
@@ -34,7 +35,7 @@ def register_controller(data: dict):
         else:
             raise CustomError(str(error), log=True)
     except ValidationError as error:
-        raise CustomError(str(error), status_code=BAD_REQUEST)
+        return {'Unsuccessful': NOT_VALID_JSON, "error": str(error)}, BAD_REQUEST
     except Exception as error:
         raise CustomError(str(error), log=True)
     

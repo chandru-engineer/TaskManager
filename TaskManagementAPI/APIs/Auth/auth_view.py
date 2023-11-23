@@ -21,7 +21,7 @@ def register_view():
         data = request.get_json(force=True)
         return register_controller(data)
     except BadRequest as error:
-        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
+        return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
     except Exception as error:
         raise CustomError(str(error), log=True)
 
@@ -34,7 +34,7 @@ def login_view():
         data = request.get_json(force=True)
         return login_controller(data)
     except BadRequest as error:
-        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
+        return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
     except Exception as error:
         raise CustomError(str(error), log=True)
 
@@ -46,8 +46,6 @@ def refresh_view():
     try:
         refresh_token = request.headers.get('refresh_token')
         return refresh_controller(refresh_token)
-    except BadRequest as error:
-        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
     except Exception as error:
         raise CustomError(str(error), log=True)
 
@@ -70,7 +68,7 @@ def forgot_password_view():
         data = request.get_json(force=True)
         return update_password_controller(data)
     except BadRequest as error:
-        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
+        return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
     except Exception as error:
         raise CustomError(str(error), log=True)
 
@@ -83,6 +81,6 @@ def forgot_password_with_auth_view():
         data = request.get_json(force=True)
         return update_password_with_auth_controller(data)
     except BadRequest as error:
-        raise CustomError(NOT_VALID_JSON, BAD_REQUEST)
+        return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
     except Exception as error:
         raise CustomError(str(error), log=True)
