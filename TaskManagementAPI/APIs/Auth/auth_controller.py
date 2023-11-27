@@ -18,7 +18,9 @@ from TaskManagementAPI.constants.messages import (
 from TaskManagementAPI.errors.error_handler import CustomError
 from TaskManagementAPI.APIs.Org.org_model import Org
 from TaskManagementAPI.APIs.Users.user_model import User
-from TaskManagementAPI.APIs.Auth.auth_schema import RegisterSchame, LoginSchema, UpdatePasswordSchema
+from TaskManagementAPI.APIs.Auth.auth_schema import (
+    RegisterSchame, LoginSchema, UpdatePasswordSchema, 
+    AddUserSchema)
 from TaskManagementAPI.APIs.Users.user_schema import GetOrgSchema
 
 
@@ -39,6 +41,7 @@ def register_controller(data: dict):
     except Exception as error:
         raise CustomError(str(error), log=True)
     
+
 def login_controller(data: dict):
     try:
         data = LoginSchema().load(data)
@@ -88,6 +91,7 @@ def refresh_controller(refresh_token: str):
     except Exception as error:
         raise CustomError(str(error), log=True)
 
+
 def forgot_password_controller(user_email: str):
     try:
         user_obj = User.query.filter_by(user_email=user_email, is_deleted=False)
@@ -102,6 +106,7 @@ def forgot_password_controller(user_email: str):
         return {'Successfull': OTP_SENT}, OK
     except Exception as error:
         raise CustomError(str(error))
+
 
 
 def update_password_controller(data: dict):
@@ -133,6 +138,16 @@ def update_password_with_auth_controller(data: dict):
             return {'Successfull': PASSWORD_UPDATED}, 200
         else:
             return {'Successfull': INVALID_PASSWORD}, 400
+    except Exception as error:
+        raise CustomError(str(error))
+
+
+
+def add_user_controller(data: dict):
+    try:
+        data = AddUserSchema().load(data)
+        user_obj = User.query.filter_by(user_email=data['user_email'], is_deleted=False)
+
     except Exception as error:
         raise CustomError(str(error))
 

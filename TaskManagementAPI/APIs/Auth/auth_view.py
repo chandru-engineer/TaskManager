@@ -10,7 +10,7 @@ from TaskManagementAPI.configs.flask_limiter_config import limiter
 from TaskManagementAPI.APIs.Auth.auth_controller import (  
     register_controller, login_controller, refresh_controller,
     forgot_password_controller, update_password_controller, 
-    update_password_with_auth_controller
+    update_password_with_auth_controller, add_user_controller
     )
 
 
@@ -80,6 +80,19 @@ def forgot_password_with_auth_view():
     try:
         data = request.get_json(force=True)
         return update_password_with_auth_controller(data)
+    except BadRequest as error:
+        return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
+    except Exception as error:
+        raise CustomError(str(error), log=True)
+    
+
+@auth_blueprint.route('/addUser', methods=['POST'])
+@limiter.limit("20 per day")
+@required_auth
+def add_user_view():
+    try:
+        data = request.get_json(force=True)
+        return add_user_controller(data)
     except BadRequest as error:
         return {'Unsuccessful': NOT_VALID_JSON}, BAD_REQUEST
     except Exception as error:

@@ -65,3 +65,11 @@ class UpdatePasswordSchema(ma.Schema):
         pattern = re.compile(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()-_=+[\]{}|;:\'",.<>/?`~])[A-Za-z\d!@#$%^&*()-_=+[\]{}|;:\'",.<>/?`~]{8,}$')
         return bool(pattern.match(value))
     
+
+
+class AddUserSchema(ma.Schema):
+    user_name = fields.String(required=True, validate=validate.Length(min=1, max=55))
+    user_email = fields.String(required=True, validate=validate.Length(min=1, max=55))
+    password = fields.String(required=True, validate=validate.Length(min=8))
+
+
